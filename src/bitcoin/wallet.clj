@@ -61,9 +61,7 @@
         add-str (.toString (address k))
         qr-key (qr key-str)
         qr-add (qr add-str)]
-    (println "Address:" add-str "\nKey:" key-str)
-    (gen-image qr-key qr-add key-str add-str)))
+    (println add-str key-str passphrase)))
 
 (defn -main [& args]
-  (when (gen-wallet (first args)) (println "Print wallet.png and delete or encrypt the file. Don't share the above key with anyone, ever."))
-  (when (first args) (println "Also, memorize your passphrase or store it SEPARATE from your wallet:" (first args))))
+  (doseq [x args] (gen-wallet x)))
