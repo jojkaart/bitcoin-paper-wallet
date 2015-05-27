@@ -13,11 +13,13 @@ The private keys are not encrypted, so be careful with them.
 
 This command will generate 5 keypairs. The output will look like this:
 
-`17DEuNqrYHKGzrJX174RtKmTcSh1KgsREy S3CXvnqjNdjfBjG7LUF8cLehU6mDZC
+<pre>
+17DEuNqrYHKGzrJX174RtKmTcSh1KgsREy S3CXvnqjNdjfBjG7LUF8cLehU6mDZC
 12GTyB5g5zhw6M8TaVAx4u7xLuHYqEkPYn SCwPgpCMUL7y84R2V5odGCVBpJWjbw
 1636MEbWnopM2XjCczJPsAgKuQwR6YmfEr S9j4HVvfknnEKLKGbbYQCZ5dysQCtf
 1HnHnfDWDXcsSxHp3kEw3MmNNsBB4dQUZJ Sa7y5u5iQxgejhoHh6uXs1ac1umjvi
-1ERwg9n1X6VoSgJ84K9D6EZZVE5ecrngTR SyY5HGopq8QKMX3EXk7YB9cdi2pP43`
+1ERwg9n1X6VoSgJ84K9D6EZZVE5ecrngTR SyY5HGopq8QKMX3EXk7YB9cdi2pP43
+</pre>
 
  You may want to do this on a computer that's never been connected to the internet. For example, you could:
 
