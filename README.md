@@ -1,18 +1,23 @@
 # bitcoin-paper-wallet
 
-Generate a Bitcoin paper wallet offline, without the need for a browser.
+Generate Bitcoin wallets with mini private keys, without the need for a browser.
 
 ## Usage
 
-`lein run`
+The program will print out a number of mini private keys along with their public bitcoin addresses
+The private keys are not encrypted, so be careful with them.
 
-The program will print out a private key and a public bitcoin address, and a wallet.png file
-that you can send to your printer (hopefully not connected to the internet).
-The paper wallet is unencrypted, so keep it in a safe place.
+### Example
 
-The wallet will look like this:
+`lein run 5`
 
- ![wallet](https://raw.github.com/dbasch/bitcoin-paper-wallet/master/wallet.png)
+This command will generate 5 keypairs. The output will look like this:
+
+`17DEuNqrYHKGzrJX174RtKmTcSh1KgsREy S3CXvnqjNdjfBjG7LUF8cLehU6mDZC
+12GTyB5g5zhw6M8TaVAx4u7xLuHYqEkPYn SCwPgpCMUL7y84R2V5odGCVBpJWjbw
+1636MEbWnopM2XjCczJPsAgKuQwR6YmfEr S9j4HVvfknnEKLKGbbYQCZ5dysQCtf
+1HnHnfDWDXcsSxHp3kEw3MmNNsBB4dQUZJ Sa7y5u5iQxgejhoHh6uXs1ac1umjvi
+1ERwg9n1X6VoSgJ84K9D6EZZVE5ecrngTR SyY5HGopq8QKMX3EXk7YB9cdi2pP43`
 
  You may want to do this on a computer that's never been connected to the internet. For example, you could:
 
@@ -20,32 +25,15 @@ The wallet will look like this:
  * run `lein uberjar` on a trusted computer, copy the jar file to a pen drive and then to the Ubuntu box.
  * run `java -jar bitcoin-[version]-SNAPSHOT-standalone.jar` on the Ubuntu box.
 
-## Password-protected wallets
-
- If you run 
-
- `lein run "correct horse battery staple"`
-
- You will get a wallet with an encrypted key. It will look like:
-
- ![wallet](https://raw.github.com/dbasch/bitcoin-paper-wallet/master/encryptedwallet.png)
-
- You will need your passphrase when you want to convert it into the Wallet Import Format. You can decrypt it by running:
-
- `lein run -m bitcoin.bip38 "correct horse battery staple" 6P......`
-
- If you do this, you should either memorize your passphase or keep it in a safe place separate from the wallet. Otherwise, you might as well generate it unencrypted.
-
 ## WARNING WARNING WARNING 
 
  Be very careful when using this program. It uses the bitcoinj library for key generation
   so I'm not responsible for any bugs that might generate insecure wallets. Use at your own risk.
 
-  Find this useful? Send me a tip at **1EmwBbfgH7BPMoCpcFzyzgAN9Ya7jm8L1Z** :)
-
 ## License
 
   Copyright © 2014 Diego Basch
+  Copyright © 2015 Joel Kaartinen
 
   Distributed under the Eclipse Public License either version 1.0 or (at
       your option) any later version.
