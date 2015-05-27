@@ -7,7 +7,8 @@
            com.google.zxing.BarcodeFormat
            com.google.zxing.client.j2se.MatrixToImageWriter
            com.fruitcat.bitcoin.BIP38
-           [com.google.bitcoin.core Address ECKey NetworkParameters DumpedPrivateKey])
+           java.math.BigInteger
+           [org.bitcoinj.core Address ECKey NetworkParameters DumpedPrivateKey])
   (:require [clojure.string :as str]
             [pandect.algo.sha256 :refer :all]))
 
@@ -53,19 +54,21 @@
 
 (defn minikey-candidate []
   (let [key-str (.toString (gen-key))]
-    (str "S" (subs key-str 2 31)))
+    (str "S" (subs key-str 2 31))))
 
 (defn minikey-validate [key-str]
-  (.startsWith (digest/sha256 (str key-str "?")) "00"))
+  (.startsWith (sha256 (str key-str "?")) "00"))
 
 (defn gen-minikey []
   (loop [testkey (minikey-candidate)]
     (if (minikey-validate testkey)
          testkey
-      (recur (minikey-candidate))))
+      (recur (minikey-candidate)))))
+
+(defn minikey-to-address [minikey]
+  (.toString (address (ECKey/fromPrivate (BigInteger. (sha256 minikey) 16) false))))
 
 (defn gen-wallet [passphrase]
-  
   (let [key-str (if passphrase
                   (com.fruitcat.bitcoin.BIP38/generateEncryptedKey passphrase)
                   (.toString (gen-key)))
@@ -73,10 +76,13 @@
                     (com.fruitcat.bitcoin.BIP38/decrypt passphrase key-str)
                     key-str)
         k (.getKey (DumpedPrivateKey. (NetworkParameters/prodNet) plain-key))
-        add-str (.toString (address k))
-        qr-key (qr key-str)
-        qr-add (qr add-str)]
+        add-str (.toString (address k))]
     (println add-str key-str passphrase)))
 
+(defn gen-miniwallet []
+  (let [key-str (gen-minikey)
+        add-str (minikey-to-address key-str)]
+    (println add-str key-str)))
+
 (defn -main [& args]
-  (doseq [x args] (gen-wallet x)))
+  (doseq [x args] (gen-miniwallet)))

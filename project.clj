@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :repositories {"bitcoinj" "http://distribution.bitcoinj.googlecode.com/git/releases/"}
-  :dependencies [[com.google/bitcoinj "0.12.3"]
+  :dependencies [[org.bitcoinj/bitcoinj-core "0.12.3"]
                  [com.madgag/scprov-jdk15on "1.47.0.3"]
                  [org.clojars.dbasch/bip38 "0.1.0"]
                  [com.google.guava/guava "15.0"]
@@ -13,4 +13,4 @@
                  [com.google.zxing/javase "2.3.0"]
                  [org.clojure/clojure "1.5.1"]
                  [pandect "0.5.2"]]
-  :main bitcoin.wallet)
+  :main bitcoin.miniwallet)
