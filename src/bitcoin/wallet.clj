@@ -7,7 +7,9 @@
            com.google.zxing.BarcodeFormat
            com.google.zxing.client.j2se.MatrixToImageWriter
            com.fruitcat.bitcoin.BIP38
-           [com.google.bitcoin.core Address ECKey NetworkParameters DumpedPrivateKey]))
+           [com.google.bitcoin.core Address ECKey NetworkParameters DumpedPrivateKey])
+  (:require [clojure.string :as str]
+            [pandect.algo.sha256 :refer :all]))
 
 ;; generate qr code as an image
 (defn qr [s]
@@ -48,6 +50,19 @@
 (defn gen-key []
   ;; hack to get the key uncompressed, because bitcoinj makes it compressed by default.
   (.getPrivateKeyEncoded (ECKey. (.getPrivKeyBytes (ECKey.)) nil) (NetworkParameters/prodNet)))
+
+(defn minikey-candidate []
+  (let [key-str (.toString (gen-key))]
+    (str "S" (subs key-str 2 31)))
+
+(defn minikey-validate [key-str]
+  (.startsWith (digest/sha256 (str key-str "?")) "00"))
+
+(defn gen-minikey []
+  (loop [testkey (minikey-candidate)]
+    (if (minikey-validate testkey)
+         testkey
+      (recur (minikey-candidate))))
 
 (defn gen-wallet [passphrase]
   
