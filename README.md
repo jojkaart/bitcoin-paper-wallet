@@ -28,7 +28,7 @@ SGCft5991PZzTNR4P118dWGcZvCMZx 040c36630e9504849c34c1974a81147adbf88f73628283044
 
 To compile JAR package, run
 
-   ./lein uberjar
+    ./lein uberjar
 
  You may want to do this on a computer that's never been connected to the internet. For example, you could:
 
