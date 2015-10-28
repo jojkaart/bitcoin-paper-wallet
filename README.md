@@ -1,11 +1,14 @@
-# bitcoin-paper-wallet
+# bitcoin-paper-wallet (Mini key version)
 
-Generate Bitcoin wallets with mini private keys, without the need for a browser.
+Generate Bitcoin wallets with
+[mini private keys](https://en.bitcoin.it/wiki/Mini_private_key_format),
+without the need for a browser.
 
 ## Usage
 
-The program will print out a number of mini private keys along with their public bitcoin addresses
-The private keys are not encrypted, so be careful with them.
+The program will print out given number of mini private keys along
+with their public keys and bitcoin addresses. The private keys are not
+encrypted, so be careful with them.
 
 ### Running
 
