@@ -5,8 +5,11 @@
   (:require [clojure.string :as str]
             [pandect.algo.sha256 :refer :all]))
 
-(defn address [k]
-  (Address. (NetworkParameters/prodNet) (.getPubKeyHash k)))
+(defn private-to-address [k]
+  (.toString (Address. (NetworkParameters/prodNet) (.getPubKeyHash k))))
+
+(defn private-to-pubkey-string [k]
+  (format "%0130x" (java.math.BigInteger. (.getPubKey k))))
 
 (defn gen-key []
   ;; hack to get the key uncompressed, because bitcoinj makes it compressed by default.
@@ -25,13 +28,13 @@
          testkey
       (recur (minikey-candidate)))))
 
-(defn minikey-to-address [minikey]
-  (.toString (address (ECKey/fromPrivate (BigInteger. (sha256 minikey) 16) false))))
+(defn minikey-to-private [minikey]
+  (ECKey/fromPrivate (BigInteger. (sha256 minikey) 16) false))
 
 (defn gen-miniwallet []
   (let [key-str (gen-minikey)
-        add-str (minikey-to-address key-str)]
-    (println add-str key-str)))
+        key (minikey-to-private key-str)]
+    (println key-str (private-to-pubkey-string key) (private-to-address key))))
 
 (defn -main [& args]
   (doseq [x (range (bigint (first args)))] (gen-miniwallet)))
