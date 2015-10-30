@@ -8,7 +8,7 @@
                  [com.madgag/scprov-jdk15on "1.47.0.3"]
                  [org.clojars.dbasch/bip38 "0.1.0"]
                  [com.google.guava/guava "15.0"]
-                 [org.slf4j/slf4j-api "1.7.5"]
+                 [org.slf4j/slf4j-simple "1.7.5"]
                  [com.google.zxing/core "2.3.0"]
                  [com.google.zxing/javase "2.3.0"]
                  [org.clojure/clojure "1.5.1"]
