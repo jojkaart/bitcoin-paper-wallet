@@ -1,9 +1,7 @@
 (ns bitcoin.main
   (:require [clojure.tools.cli :refer [cli]])
-  (:require [bitcoin.miniwallet :refer [gen-miniwallet]])
+  (:require [bitcoin.miniwallet :refer [gen-miniwallet gen-bip38]])
   (:gen-class))
-
-(defn gen-bip38 [] (println "Not implemented yet!"))
 
 (defn -main [& args]
   (let [[opts args banner] (cli args
@@ -14,10 +12,12 @@
     (cond
       (:help opts)
       (do
-        (println "Paper wallet generator. Give number of wallets to generate as an argument.\n")
+        (println "Bitcoin paper wallet generator. Usage:\n")
+        (println " walletgen N              Generates N mini wallets")
+        (println " walletgen -e PASSWORD... Generates BIP38 wallets with given passwords\n")
         (println banner))
-      (== (count args) 1)
-      (doseq [x (range (bigint (first args)))] (if (:bip38 opts) (gen-bip38) (gen-miniwallet)))
+      (:bip38 opts) (doseq [pw args] (gen-bip38 pw))
+      (== (count args) 1) (doseq [x (range (bigint (first args)))] (gen-miniwallet))
       :else (println "Invalid arguments. See --help")
       )
     )

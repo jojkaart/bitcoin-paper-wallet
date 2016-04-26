@@ -35,3 +35,9 @@
   (let [key-str (gen-minikey)
         key (minikey-to-private key-str)]
     (println key-str (private-to-pubkey-string key) (private-to-address key))))
+
+(defn gen-bip38 [passphrase]
+  (let [key-str (com.fruitcat.bitcoin.BIP38/generateEncryptedKey passphrase)
+        plain-key (com.fruitcat.bitcoin.BIP38/decrypt passphrase key-str)
+        key (.getKey (DumpedPrivateKey. (NetworkParameters/prodNet) plain-key))]
+    (println key-str (private-to-pubkey-string key) (private-to-address key) passphrase)))
