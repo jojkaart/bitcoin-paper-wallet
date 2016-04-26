@@ -35,6 +35,3 @@
   (let [key-str (gen-minikey)
         key (minikey-to-private key-str)]
     (println key-str (private-to-pubkey-string key) (private-to-address key))))
-
-(defn -main [& args]
-  (doseq [x (range (bigint (first args)))] (gen-miniwallet)))
