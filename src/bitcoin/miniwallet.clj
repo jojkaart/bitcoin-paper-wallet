@@ -9,7 +9,7 @@
   (.toString (Address. (NetworkParameters/prodNet) (.getPubKeyHash k))))
 
 (defn private-to-pubkey-string [k]
-  (format "%0130x" (java.math.BigInteger. (.getPubKey k))))
+  (format (if (.isCompressed k) "%066x" "%0130x") (java.math.BigInteger. (.getPubKey k))))
 
 (defn gen-key []
   ;; hack to get the key uncompressed, because bitcoinj makes it compressed by default.
@@ -37,7 +37,7 @@
     (println key-str (private-to-pubkey-string key) (private-to-address key))))
 
 (defn gen-bip38 [passphrase]
-  (let [key-str (com.fruitcat.bitcoin.BIP38/generateEncryptedKey passphrase)
-        plain-key (com.fruitcat.bitcoin.BIP38/decrypt passphrase key-str)
-        key (.getKey (DumpedPrivateKey. (NetworkParameters/prodNet) plain-key))]
+  (let [key (ECKey.)
+        plain-key (.toString (.getPrivateKeyEncoded key (NetworkParameters/prodNet)))
+        key-str (com.fruitcat.bitcoin.BIP38/encryptNoEC passphrase plain-key true)]
     (println key-str (private-to-pubkey-string key) (private-to-address key) passphrase)))
