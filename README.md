@@ -1,20 +1,39 @@
-# bitcoin-paper-wallet (Mini key version)
+<!-- -*- mode: markdown; coding: utf-8 -*- -->
+# bitcoin-paper-wallet with bulk generation support
 
-Generate Bitcoin wallets with
+Generates standalone Bitcoin wallets without the need for a browser or
+bitcoin wallet application. This tool supports
 [mini private keys](https://en.bitcoin.it/wiki/Mini_private_key_format),
-without the need for a browser.
+[BIP38 encrypted](https://github.com/bitcoin/bips/blob/master/bip-0038.mediawiki)
+wallets, and ordinary bitcoin wallets in *dumpprivkey* format.
 
 ## Usage
 
-The program will print out given number of mini private keys along
-with their public keys and bitcoin addresses. The private keys are not
-encrypted, so be careful with them.
+The program will print out given number of private keys along with
+their public keys and bitcoin addresses. The private keys are not
+encrypted (unless you specify `-e`), so be careful with them.
 
 ### Running
 
-    ./lein run 5
+#### Standard wallets
 
-This command will generate 5 keypairs. The output will look like this:
+./lein run -- 4
+
+Will create 4 keypairs in *dumpprivkey* format.
+
+```
+L12M6hknHmXTJ35sDFLXWgUtjM7SsvvdHXp1wZ6hvnDHStAxHMEG 03d0dc7da415e9458b1c80c757bfff83ef35830651036df0f85fa98a5f1ac784ca 172Sdk4Y2G7qgraRBAjjtCAcW1rWX3s9X5
+KykPgcLaRqaurFYsarbiYjWUWGhniWauYQ6EK42o1Pd755zAZ1Sy 02486d6137a5f8710b22fadb3eb3d553da89216c990b5464bfba162639ab496de5 13D2h6mJetbuRuzEf5qeEavJh4T9aJcSFB
+Kx23GkzZR3kiMBykp3NveZQ412e664M19LH7TDE2jW3orMc7k4rJ 039da623defd53429d442e07a02c8de934c3e6600e9eb51b48f989fc203e905d0c 1PEn3U3c21GcD8Utd9sNRrRnyEkXj8WunG
+L1duFDZcoTZb3RDqY4pT6Qhao77zfUFv7RY9AbDqXfdugEEXvyem 02d839200dac2a10cfa3745f566ae96f14e7950303a14e9792025e645b615ef987 1LNiB5t9s737KSQUH55zd4pnKAdNgNPrQs
+```
+
+#### Mini wallets
+
+    ./lein run -- -m 5
+
+This command will generate 5 keypairs in mini format. The output will
+look like this:
 
 ```
 Sv7gQpP9UTUiStpTqmMKAnGUwYYmuL 044f6b6c83596895c1e06f12aa9658202ed44fbade7ab5ffa20b11c6f6a5e7d6c8a63006c33394ffb1733e1a2e677c4cdd2a9d8def18e70e95d7da1db9b4204763 1Muiu5JMJZyew3vLGz7pYu2PEdgGyjUgpp
@@ -24,19 +43,34 @@ SUuodsAETRS7dssAcifY5P3W1NnjG5 04167d4bddece86219b7b8e485e0dfbb1466650b54912ebec
 SGCft5991PZzTNR4P118dWGcZvCMZx 040c36630e9504849c34c1974a81147adbf88f736282830441d3c4e92edbdf06c92fc45fedd872ddc77ac84fd67f410250f21ade23c955d073d7fefdc50af56457 1ASCaLv2hRbhqtg1sXWizRUxHUXDy24Ncz
 ```
 
+#### Encrypted wallets
+
+    ./lein run -- -e `pwgen 10 3`
+
+This command will generate 3 encrypted wallets with passwords of 10
+characters. The fourth column contains the password. The output will
+look like this:
+
+```
+6PYXcT2LFjgfBC8YJesh9ppuffha6XyK3uTNZ887LHXiiZiJkXsjgAaH3a 02fbf49fe33ca359ab34a79a9ee7224ecd16a4e9eee723a045777bc7d4bbf7a136 1KzZMX4irPwW16nQp5W7RMZPVcDgyXFCQC Aiph9oocoy
+6PYN74Wp42JH2RV5ygWLBzoeH7gWbu1nHbwVwBdzBp7vWnv4DPgaA4AHyh 02b0d69f01d7c55037655baa15ce1bae874c038190f180e9ea6c630049596d394e 12auw8nSBkA2GM8Y3cZc4UPdo5V3pRULUd eeVeichu2i
+6PYNT5ukyH1JtgL8g2ySVjuu6g4LnWAp1fYy4QEo14qSn72QZh2zWMPYHG 02f8f54a8deefad77d414eba450b5540334aae3f7e3ed952da779c6be66e309f3d 12XJVYhoNifMQ4qComDbV77inhgfzknxXt aesh2an5Oh
+```
+
 ### Compiling
 
 To compile JAR package, run
 
     ./lein uberjar
 
- You may want to do this on a computer that's never been connected to the internet. For example, you could:
+You may want to do this on a computer that's never been connected to the Internet. For example, you could:
 
  * Boot a live CD/USB of Ubuntu, don't connect it to a network.
  * run `lein uberjar` on a trusted computer, copy the jar file to a pen drive and then to the Ubuntu box.
- * run `java -jar bitcoin-[version]-SNAPSHOT-standalone.jar` on the Ubuntu box.
+ * give executable flag to the .jar file: `chmod +x bitcoin-[version]-SNAPSHOT-standalone.jar`
+ * just `./bitcoin-[version]-SNAPSHOT-standalone.jar` on the Ubuntu box.
 
-## WARNING WARNING WARNING 
+## WARNING WARNING WARNING
 
  Be very careful when using this program. It uses the bitcoinj library for key generation
   so we are not responsible for any bugs that might generate insecure wallets. Use at your own risk.
@@ -44,7 +78,7 @@ To compile JAR package, run
 ## License
 
 * Copyright © 2014 Diego Basch
-* Copyright © 2015 Prasos Ltd
+* Copyright © 2015–2016 Prasos Ltd
 
   Distributed under the Eclipse Public License either version 1.0 or (at
       your option) any later version.
