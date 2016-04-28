@@ -31,6 +31,11 @@
 ;; Format given ECKey to "dumpprivkey" format
 (defn key-to-str [key] (.toString (.getPrivateKeyEncoded key (NetworkParameters/prodNet))))
 
+;; Ordinary bitcoin wallet with compressed public key
+(defn gen-wallet []
+  (let [key (ECKey.)]
+    (println (key-to-str key) (.getPublicKeyAsHex key) (private-to-address key))))
+
 ;; Bitcoin wallet with mini private key (https://en.bitcoin.it/wiki/Mini_private_key_format)
 (defn gen-miniwallet []
   (let [key-str (gen-minikey)
