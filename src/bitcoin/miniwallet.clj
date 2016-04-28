@@ -11,12 +11,12 @@
 (defn private-to-pubkey-string [k]
   (format (if (.isCompressed k) "%066x" "%0130x") (java.math.BigInteger. (.getPubKey k))))
 
-(defn gen-key []
+(defn gen-uncompressed-key []
   ;; hack to get the key uncompressed, because bitcoinj makes it compressed by default.
   (.getPrivateKeyEncoded (ECKey. (.getPrivKeyBytes (ECKey.)) nil) (NetworkParameters/prodNet)))
 
 (defn minikey-candidate []
-  (let [key-str (.toString (gen-key))]
+  (let [key-str (.toString (gen-uncompressed-key))]
     (str "S" (subs key-str 2 31))))
 
 (defn minikey-validate [key-str]
