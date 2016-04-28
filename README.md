@@ -17,9 +17,10 @@ encrypted (unless you specify `-e`), so be careful with them.
 
 #### Standard wallets
 
-./lein run -- 4
+	./lein run -- 4
 
-Will create 4 keypairs in *dumpprivkey* format.
+Will create 4 keypairs in *dumpprivkey* format. The output will
+look like this:
 
 ```
 L12M6hknHmXTJ35sDFLXWgUtjM7SsvvdHXp1wZ6hvnDHStAxHMEG 03d0dc7da415e9458b1c80c757bfff83ef35830651036df0f85fa98a5f1ac784ca 172Sdk4Y2G7qgraRBAjjtCAcW1rWX3s9X5
@@ -32,8 +33,7 @@ L1duFDZcoTZb3RDqY4pT6Qhao77zfUFv7RY9AbDqXfdugEEXvyem 02d839200dac2a10cfa3745f566
 
     ./lein run -- -m 5
 
-This command will generate 5 keypairs in mini format. The output will
-look like this:
+This command will generate 5 keypairs in mini format.
 
 ```
 Sv7gQpP9UTUiStpTqmMKAnGUwYYmuL 044f6b6c83596895c1e06f12aa9658202ed44fbade7ab5ffa20b11c6f6a5e7d6c8a63006c33394ffb1733e1a2e677c4cdd2a9d8def18e70e95d7da1db9b4204763 1Muiu5JMJZyew3vLGz7pYu2PEdgGyjUgpp
@@ -48,8 +48,7 @@ SGCft5991PZzTNR4P118dWGcZvCMZx 040c36630e9504849c34c1974a81147adbf88f73628283044
     ./lein run -- -e `pwgen 10 3`
 
 This command will generate 3 encrypted wallets with passwords of 10
-characters. The fourth column contains the password. The output will
-look like this:
+characters. The fourth column contains the password.
 
 ```
 6PYXcT2LFjgfBC8YJesh9ppuffha6XyK3uTNZ887LHXiiZiJkXsjgAaH3a 02fbf49fe33ca359ab34a79a9ee7224ecd16a4e9eee723a045777bc7d4bbf7a136 1KzZMX4irPwW16nQp5W7RMZPVcDgyXFCQC Aiph9oocoy
