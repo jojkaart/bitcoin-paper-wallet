@@ -1,4 +1,4 @@
-(defproject bitcoin "0.1.0-SNAPSHOT"
+(defproject bitcoin "0.1.1-SNAPSHOT"
   :description "offline paper wallet generator"
   :url "http://diegobasch.com"
   :license {:name "Eclipse Public License"
