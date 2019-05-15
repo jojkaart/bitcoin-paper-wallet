@@ -4,8 +4,7 @@
 Generates standalone Bitcoin wallets without the need for a browser or
 bitcoin wallet application. This tool supports
 [mini private keys](https://en.bitcoin.it/wiki/Mini_private_key_format),
-[BIP38 encrypted](https://github.com/bitcoin/bips/blob/master/bip-0038.mediawiki)
-wallets, and ordinary bitcoin wallets in *dumpprivkey* format.
+and ordinary bitcoin wallets in *dumpprivkey* format.
 
 ## Usage
 
@@ -41,19 +40,6 @@ StEq659PunPXrcyxZmYdL589LakZ9h 04bbcf54326aebd652f51d8b4ffaf0f44b23bf73ff4523e3e
 S7t3gjPehfbetCzPN4k6GGJW1rQtBE 04b425b57d6b8838cb9a05d5b049c03ddb35ff22871efe56037a79afc7279bddba0a8ca2432cc61e12a5547072bb0ef523e29a22bd8b21dc714c5706e83b2e32d0 1ECFCRACSAR58ytYssRQ92nu2AjhbUJx2N
 SUuodsAETRS7dssAcifY5P3W1NnjG5 04167d4bddece86219b7b8e485e0dfbb1466650b54912ebec2abc8cf70ff4fc6736630bc3065e6837b714b091dcc25cfc4ab5fb9826368e4d38526e7662d7f8768 12FiQhbjMeUYX32iVyqi3GaWrLX5wSPbwM
 SGCft5991PZzTNR4P118dWGcZvCMZx 040c36630e9504849c34c1974a81147adbf88f736282830441d3c4e92edbdf06c92fc45fedd872ddc77ac84fd67f410250f21ade23c955d073d7fefdc50af56457 1ASCaLv2hRbhqtg1sXWizRUxHUXDy24Ncz
-```
-
-#### Encrypted wallets
-
-    ./lein run -- -e `pwgen 10 3`
-
-This command will generate 3 encrypted wallets with passwords of 10
-characters. The fourth column contains the password.
-
-```
-6PYXcT2LFjgfBC8YJesh9ppuffha6XyK3uTNZ887LHXiiZiJkXsjgAaH3a 02fbf49fe33ca359ab34a79a9ee7224ecd16a4e9eee723a045777bc7d4bbf7a136 1KzZMX4irPwW16nQp5W7RMZPVcDgyXFCQC Aiph9oocoy
-6PYN74Wp42JH2RV5ygWLBzoeH7gWbu1nHbwVwBdzBp7vWnv4DPgaA4AHyh 02b0d69f01d7c55037655baa15ce1bae874c038190f180e9ea6c630049596d394e 12auw8nSBkA2GM8Y3cZc4UPdo5V3pRULUd eeVeichu2i
-6PYNT5ukyH1JtgL8g2ySVjuu6g4LnWAp1fYy4QEo14qSn72QZh2zWMPYHG 02f8f54a8deefad77d414eba450b5540334aae3f7e3ed952da779c6be66e309f3d 12XJVYhoNifMQ4qComDbV77inhgfzknxXt aesh2an5Oh
 ```
 
 ### Compiling

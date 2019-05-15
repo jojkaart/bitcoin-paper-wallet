@@ -41,9 +41,3 @@
   (let [key-str (gen-minikey)
         key (minikey-to-private key-str)]
     (println key-str (.getPublicKeyAsHex key) (private-to-address key))))
-
-;; Encrypted bitcoin wallet (https://github.com/bitcoin/bips/blob/master/bip-0038.mediawiki)
-(defn gen-bip38 [passphrase]
-  (let [key (ECKey.)
-        key-str (com.fruitcat.bitcoin.BIP38/encryptNoEC passphrase (key-to-str key) true)]
-    (println key-str (.getPublicKeyAsHex key) (private-to-address key) passphrase)))
