@@ -42,4 +42,4 @@
 (defn gen-miniwallet []
   (let [key-str (gen-minikey)
         key (minikey-to-private key-str)]
-    (println key-str (.getPublicKeyAsHex key) (private-to-address key))))
+    (println key-str (.getPublicKeyAsHex key) (private-to-address key) (key-to-str key))))
