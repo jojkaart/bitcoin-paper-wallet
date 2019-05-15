@@ -3,10 +3,9 @@
   :url "http://diegobasch.com"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :repositories {"bitcoinj" "http://distribution.bitcoinj.googlecode.com/git/releases/"}
-  :dependencies [[org.bitcoinj/bitcoinj-core "0.13.6"]
-                 [org.clojure/tools.cli "0.3.3"]
-                 [org.slf4j/slf4j-simple "1.7.21"]
-                 [org.clojure/clojure "1.8.0"]
+  :dependencies [[org.bitcoinj/bitcoinj-core "0.15.2"]
+                 [org.clojure/tools.cli "0.4.2"]
+                 [org.slf4j/slf4j-simple "1.7.26"]
+                 [org.clojure/clojure "1.10.0"]
                  [pandect "0.5.4"]]
   :main bitcoin.main)

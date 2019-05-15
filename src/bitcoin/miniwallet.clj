@@ -1,16 +1,18 @@
 (ns bitcoin.miniwallet
   (:gen-class :main true)
   (:import java.math.BigInteger
-           [org.bitcoinj.core Address ECKey NetworkParameters DumpedPrivateKey])
+           [org.bitcoinj.core Address ECKey DumpedPrivateKey]
+           [org.bitcoinj.params MainNetParams]
+           [org.bitcoinj.script Script$ScriptType])
   (:require [clojure.string :as str]
             [pandect.algo.sha256 :refer :all]))
 
 (defn private-to-address [k]
-  (.toString (Address. (NetworkParameters/prodNet) (.getPubKeyHash k))))
+  (.toString (Address/fromKey (MainNetParams/get) k (Script$ScriptType/P2PKH))))
 
 (defn gen-uncompressed-key []
   ;; hack to get the key uncompressed, because bitcoinj makes it compressed by default.
-  (.getPrivateKeyEncoded (ECKey. (.getPrivKeyBytes (ECKey.)) nil) (NetworkParameters/prodNet)))
+  (.getPrivateKeyEncoded (ECKey. (.getPrivKeyBytes (ECKey.)) nil) (MainNetParams/get)))
 
 (defn minikey-candidate []
   (let [key-str (.toString (gen-uncompressed-key))]
@@ -29,7 +31,7 @@
   (ECKey/fromPrivate (BigInteger. (sha256 minikey) 16) false))
 
 ;; Format given ECKey to "dumpprivkey" format
-(defn key-to-str [key] (.toString (.getPrivateKeyEncoded key (NetworkParameters/prodNet))))
+(defn key-to-str [key] (.toString (.getPrivateKeyEncoded key (MainNetParams/get))))
 
 ;; Ordinary bitcoin wallet with compressed public key
 (defn gen-wallet []
